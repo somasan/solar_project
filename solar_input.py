@@ -19,17 +19,20 @@ def read_space_objects_data_from_file(input_filename):
             if len(line.strip()) == 0 or line[0] == '#':
                 continue  # пустые строки и строки-комментарии пропускаем
             object_type = line.split()[0].lower()
-            if object_type == "star":  # FIXME: do the same for planet
-                star = Star()
-                parse_star_parameters(line, star)
-                objects.append(star)
+            if object_type == "star" or object_type =="planet":  # FIXME: do the same for planet
+                if object_type = "star":
+                    star = parse_star_parameters(line)
+                    objects.append(star)
+                if object_type = "planet":
+                    planet = parse_planet_parameters(line)
+                    objects.append(planet)
             else:
                 print("Unknown space object")
 
     return objects
 
 
-def parse_star_parameters(line, star):
+def parse_star_parameters(line):
     """Считывает данные о звезде из строки.
     Входная строка должна иметь слеюущий формат:
     Star <радиус в пикселах> <цвет> <масса> <x> <y> <Vx> <Vy>
@@ -43,10 +46,21 @@ def parse_star_parameters(line, star):
     **line** — строка с описание звезды.
     **star** — объект звезды.
     """
+    star = Star()
+    line_elems = line.split(' ')
+    star.size = line_elems[1]
+    star.color = line_elems[2]
+    star.mass = line_elems[3]
+    star.x = line_elems[4]
+    star.y = line_elems[5]
+    star.Vx = line_elems[6]
+    star.Vy = line_elems[7]
+    
+    return star
 
     pass  # FIXME: not done yet
 
-def parse_planet_parameters(line, planet):
+def parse_planet_parameters(line):
     """Считывает данные о планете из строки.
     Предполагается такая строка:
     Входная строка должна иметь слеюущий формат:
@@ -61,6 +75,18 @@ def parse_planet_parameters(line, planet):
     **line** — строка с описание планеты.
     **planet** — объект планеты.
     """
+    planet = Planet()
+ 
+    line_elems = line.split(' ')
+    planet.size = line_elems[1]
+    planet.color = line_elems[2]
+    planet.mass = line_elems[3]
+    planet.x = line_elems[4]
+    planet.y = line_elems[5]
+    planet.Vx = line_elems[6]
+    planet.Vy = line_elems[7]
+    
+    return planet
     pass  # FIXME: not done yet...
 
 
