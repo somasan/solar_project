@@ -20,10 +20,10 @@ def read_space_objects_data_from_file(input_filename):
                 continue  # пустые строки и строки-комментарии пропускаем
             object_type = line.split()[0].lower()
             if object_type == "star" or object_type =="planet":  # FIXME: do the same for planet
-                if object_type = "star":
+                if object_type == "star":
                     star = parse_star_parameters(line)
                     objects.append(star)
-                if object_type = "planet":
+                if object_type == "planet":
                     planet = parse_planet_parameters(line)
                     objects.append(planet)
             else:
